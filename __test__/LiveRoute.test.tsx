@@ -17,11 +17,11 @@ const LinkGenerator = ({ to }) => (
 )
 
 const componentGenerator = (name: string) =>
-  class ClassComA extends React.Component {
+  (class ClassComA extends React.Component {
     render() {
       return <h1>{textGenerator(name)}</h1>
     }
-  }
+  })
 
 const renderPropsGenerator = (name: string) => () => <h1>{textGenerator(name)}</h1>
 
@@ -57,7 +57,10 @@ afterEach(cleanup)
 
 // this is a handy function that I would utilize for any component
 // that relies on the router being in context
-function renderWithRouter(ui, { route = '/', history = createMemoryHistory({ initialEntries: [route] }) } = {}) {
+function renderWithRouter(ui, { route = '/', history = /* TODO: JSFIX could not patch the breaking change:
+Removed relative pathname support in hash history and memory history 
+Suggested fix: Relative paths are no longer supportet by the hash/memory history, hence we recommend using the entire path name instead. */
+createMemoryHistory({ initialEntries: [route] }) } = {}) {
   return {
     ...render(<Router history={history}>{ui}</Router>),
     // adding `history` to the returned utilities to allow us

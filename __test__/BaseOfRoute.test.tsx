@@ -64,7 +64,10 @@ describe('A <Route>', () => {
   })
 
   it('matches using nextContext when updating', () => {
-    const history = createHistory({
+    const history = /* TODO: JSFIX could not patch the breaking change:
+    Removed relative pathname support in hash history and memory history 
+    Suggested fix: Relative paths are no longer supportet by the hash/memory history, hence we recommend using the entire path name instead. */
+    createHistory({
       initialEntries: ['/sushi/california']
     })
 
@@ -75,6 +78,9 @@ describe('A <Route>', () => {
       node
     )
 
+    /* TODO: JSFIX could not patch the breaking change:
+    Removed relative pathname support in hash history and memory history 
+    Suggested fix: Relative paths are no longer supportet by the hash/memory history, hence we recommend using the entire path name instead. */
     history.push('/sushi/spicy-tuna')
 
     expect(node.innerHTML).toContain('/sushi/spicy-tuna')
@@ -143,6 +149,9 @@ describe('A <Route>', () => {
           return <div>Hello World</div>
         }
       }
+      /* TODO: JSFIX could not patch the breaking change:
+      Removed relative pathname support in hash history and memory history 
+      Suggested fix: Relative paths are no longer supportet by the hash/memory history, hence we recommend using the entire path name instead. */
       history.push('/hello')
       ReactDOM.render(
         <Router history={history}>
@@ -154,6 +163,9 @@ describe('A <Route>', () => {
       expect(mount).toHaveBeenCalledTimes(1)
       expect(node.innerHTML).toContain('Hello World')
 
+      /* TODO: JSFIX could not patch the breaking change:
+      Removed relative pathname support in hash history and memory history 
+      Suggested fix: Relative paths are no longer supportet by the hash/memory history, hence we recommend using the entire path name instead. */
       history.push('/world/somewhere/else')
 
       expect(mount).toHaveBeenCalledTimes(1)
